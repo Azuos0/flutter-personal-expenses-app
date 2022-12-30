@@ -12,12 +12,14 @@ class Chart extends StatelessWidget {
   });
 
   List<Map<String, Object>> get groupedTransactionValues {
+    print('================= start ================');
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
       var totalSum = 0.0;
 
       for (var tx in recentTransactions) {
-        if (tx.date.difference(weekDay).inDays == 0) {
+        if (tx.date.difference(weekDay).inDays == 0 &&
+            tx.date.day == weekDay.day) {
           totalSum += tx.amount;
         }
       }
@@ -45,7 +47,9 @@ class Chart extends StatelessWidget {
         return ChartBar(
           label: data['day'] as String,
           spendingAmount: data['amount'] as double,
-          spendingPctOfTotal: (data['amount'] as double) / totalSpending,
+          spendingPctOfTotal: totalSpending == 0.0
+              ? 0.0
+              : (data['amount'] as double) / totalSpending,
         );
       }).toList()),
     );
