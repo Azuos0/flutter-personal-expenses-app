@@ -59,25 +59,43 @@ class _NewTransactionState extends State<NewTransaction> {
                   const TextInputType.numberWithOptions(decimal: true),
               controller: amountController,
               cursorColor: Colors.purple,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelStyle: TextStyle(
-                  color: Colors.purple,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 labelText: 'Amount',
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.purple,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
             ),
-            TextButton(
+            SizedBox(
+              height: 70,
+              child: Row(
+                children: [
+                  Text('No date chosen'),
+                  TextButton(
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
               onPressed: submitData,
-              child: const Text(
+              child: Text(
                 'Add Transaction',
-                style: TextStyle(
-                  color: Colors.purple,
-                ),
+                // style: TextStyle(
+                //   color: Colors.black,
+                // ),
               ),
             ),
           ],
