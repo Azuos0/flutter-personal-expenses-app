@@ -19,10 +19,11 @@ class _NewTransactionState extends State<NewTransaction> {
     final title = _titleController.text;
     final amount = double.tryParse(_amountController.text) ?? -1;
 
-    if (title.isNotEmpty && amount >= 0) {
+    if (title.isNotEmpty && amount >= 0 && _selectedDate != null) {
       widget.addTx(
         title,
         amount,
+        _selectedDate,
       );
 
       Navigator.of(context).pop();
@@ -36,10 +37,11 @@ class _NewTransactionState extends State<NewTransaction> {
       firstDate: DateTime(2023),
       lastDate: DateTime.now(),
     ).then((pickedDate) {
-      if (pickedDate == null) return;
-      setState(() {
-        _selectedDate = pickedDate;
-      });
+      if (pickedDate != null) {
+        setState(() {
+          _selectedDate = pickedDate;
+        });
+      }
     });
   }
 
