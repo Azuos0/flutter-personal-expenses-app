@@ -47,76 +47,83 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              onSubmitted: (_) => _submitData,
-              controller: _titleController,
-              cursorColor: Colors.purple,
-              decoration: const InputDecoration(
-                labelStyle: TextStyle(
-                  color: Colors.purple,
-                ),
-                labelText: 'Title',
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                onSubmitted: (_) => _submitData,
+                controller: _titleController,
+                cursorColor: Colors.purple,
+                decoration: const InputDecoration(
+                  labelStyle: TextStyle(
                     color: Colors.purple,
                   ),
+                  labelText: 'Title',
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.purple,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            TextField(
-              onSubmitted: (_) => _submitData,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              controller: _amountController,
-              cursorColor: Colors.purple,
-              decoration: InputDecoration(
-                labelStyle: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                labelText: 'Amount',
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
+              TextField(
+                onSubmitted: (_) => _submitData,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                controller: _amountController,
+                cursorColor: Colors.purple,
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),
+                  labelText: 'Amount',
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'No date chosen'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No date chosen'
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
                       ),
                     ),
-                  ),
-                ],
+                    TextButton(
+                      onPressed: _presentDatePicker,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: _submitData,
-              child: const Text('Add Transaction'),
-            ),
-          ],
+              ElevatedButton(
+                onPressed: _submitData,
+                child: const Text('Add Transaction'),
+              ),
+            ],
+          ),
         ),
       ),
     );
